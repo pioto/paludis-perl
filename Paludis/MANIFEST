@@ -1,0 +1,8 @@
+Changes
+Makefile.PL
+MANIFEST
+Paludis.xs
+ppport.h
+README
+t/Paludis.t
+lib/Paludis.pm

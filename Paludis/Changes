@@ -1,0 +1,6 @@
+Revision history for Perl extension Paludis.
+
+0.01  Thu Jul  3 02:48:29 2008
+	- original version; created by h2xs 1.23 with options
+		-A -n Paludis
+
