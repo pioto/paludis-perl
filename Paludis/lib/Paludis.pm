@@ -37,9 +37,7 @@ XSLoader::load('Paludis', $VERSION);
 
     use overload
         '<=>'    => \&Paludis::VersionSpec::comp,
-        '=='     => \&Paludis::VersionSpec::eql,
-        '<'      => \&Paludis::VersionSpec::lessthan,
-        fallback => 1;
+        fallback  => 1;
 }
 
 1;

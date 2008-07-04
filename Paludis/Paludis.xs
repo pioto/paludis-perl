@@ -51,7 +51,7 @@ VersionSpec::new(char * text)
 void
 VersionSpec::DESTROY()
 
-bool
+int
 comp(lobj, robj, swap)
     VersionSpec * lobj
     VersionSpec * robj
@@ -60,24 +60,3 @@ comp(lobj, robj, swap)
     RETVAL = (lobj->compare(*robj));
   OUTPUT:
     RETVAL
-
-bool
-eql(lobj, robj, swap)
-    VersionSpec * lobj
-    VersionSpec * robj
-    IV swap
-  CODE:
-    RETVAL = (*lobj == *robj);
-  OUTPUT:
-    RETVAL
-
-bool
-lessthan(lobj, robj, swap)
-    VersionSpec * lobj
-    VersionSpec * robj
-    IV swap
-  CODE:
-    RETVAL = (*lobj < *robj);
-  OUTPUT:
-    RETVAL
-
