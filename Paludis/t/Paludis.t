@@ -3,16 +3,32 @@
 
 #########################
 
-# change 'tests => 1' to 'tests => last_test_to_print';
+use YAML 'Dump';
 
-use Test::More tests => 4;
+use Test::More tests => 15;
 BEGIN { use_ok('Paludis') };
 
 #########################
 
-# Insert your test code below, the Test::More module is use()ed here so read
-# its man page ( perldoc Test::More ) for help writing this test script.
+{
+    ok my $paludis = Paludis->new();
+    is $paludis->MAJOR_VERSION, 0;
+    is $paludis->MINOR_VERSION, 27;
+}
 
-ok my $paludis = Paludis->new();
-is $paludis->MAJOR_VERSION, 0;
-is $paludis->MINOR_VERSION, 27;
+{
+    ok my $ver1 = Paludis::VersionSpec->new("1");
+    ok my $ver2 = Paludis::VersionSpec->new("2");
+    ok $ver2 > $ver1, '$ver2 > $ver1';
+    ok $ver1 < $ver2, '$ver1 < $ver2';
+    ok $ver1 == $ver1, '$ver1 == $ver1';
+    ok $ver2 == $ver2, '$ver2 == $ver2';
+    ok $ver1 != $ver2, '$ver1 != $ver2';
+    ok $ver2 != $ver1, '$ver2 != $ver1';
+}
+
+{
+    ok my $ver20 = Paludis::VersionSpec->new("2.0");
+    ok my $ver20r0 = Paludis::VersionSpec->new("2.0-r0");
+    ok $ver20 == $ver20r0, '$ver20 == $ver20r0';
+}

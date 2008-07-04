@@ -12,6 +12,8 @@ extern "C" {
 
 #include <paludis/paludis.hh>
 
+using namespace paludis;
+
 class Paludis {
     public:
         Paludis() {
@@ -40,3 +42,42 @@ Paludis::MAJOR_VERSION()
 
 int
 Paludis::MINOR_VERSION()
+
+MODULE = Paludis		PACKAGE = Paludis::VersionSpec
+
+VersionSpec *
+VersionSpec::new(char * text)
+
+void
+VersionSpec::DESTROY()
+
+bool
+comp(lobj, robj, swap)
+    VersionSpec * lobj
+    VersionSpec * robj
+    IV swap
+  CODE:
+    RETVAL = (lobj->compare(*robj));
+  OUTPUT:
+    RETVAL
+
+bool
+eql(lobj, robj, swap)
+    VersionSpec * lobj
+    VersionSpec * robj
+    IV swap
+  CODE:
+    RETVAL = (*lobj == *robj);
+  OUTPUT:
+    RETVAL
+
+bool
+lessthan(lobj, robj, swap)
+    VersionSpec * lobj
+    VersionSpec * robj
+    IV swap
+  CODE:
+    RETVAL = (*lobj < *robj);
+  OUTPUT:
+    RETVAL
+

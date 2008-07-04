@@ -32,6 +32,16 @@ XSLoader::load('Paludis', $VERSION);
 
 # Preloaded methods go here.
 
+{
+    package Paludis::VersionSpec;
+
+    use overload
+        '<=>'    => \&Paludis::VersionSpec::comp,
+        '=='     => \&Paludis::VersionSpec::eql,
+        '<'      => \&Paludis::VersionSpec::lessthan,
+        fallback => 1;
+}
+
 1;
 __END__
 # Below is stub documentation for your module. You'd better edit it!
