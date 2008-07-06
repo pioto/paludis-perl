@@ -5,6 +5,7 @@ $CC = 'g++';
 
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
+my $paludis_include_dir = `pkg-config --cflags-only-I paludis`;
 WriteMakefile(
     NAME              => 'Paludis',
     VERSION_FROM      => 'lib/Paludis.pm', # finds $VERSION
@@ -13,10 +14,11 @@ WriteMakefile(
       (ABSTRACT_FROM  => 'lib/Paludis.pm', # retrieve abstract from module
        AUTHOR         => 'Mike Kelly <pioto@pioto.org>') : ()),
     LIBS              => ['-lpaludis', '-lpaludisutil', '-lpaludisargs'],
-    DEFINE            => '-DPALUDIS_HAVE_EXTERN_TEMPLATE=1',
+    DEFINE            => '',
     CC                => $CC,
+    CCFLAGS           => `pkg-config --cflags-only-other paludis`,
     LD                => '$(CC)',
-    INC               => '-I. -I/usr/include/paludis-0.27',
+    INC               => "-I. $paludis_include_dir",
 	# Un-comment this if you add C files to link with later:
     # OBJECT            => '$(O_FILES)', # link all the C files too
     XSOPT             => '-C++',
