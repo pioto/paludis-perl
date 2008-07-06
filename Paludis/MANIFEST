@@ -4,5 +4,8 @@ MANIFEST
 Paludis.xs
 ppport.h
 README
-t/Paludis.t
+t/0000_Paludis.t
+t/0100_VersionSpec.t
 lib/Paludis.pm
+typemap
+perlobject.map
