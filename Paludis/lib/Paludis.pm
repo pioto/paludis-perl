@@ -73,34 +73,42 @@ Paludis - Perl bindings for Paludis, the Other Package Mangler
 
 =head1 SYNOPSIS
 
-  use Paludis;
+  use Paludis ':all';
 
-  print "$Paludis::PALUDIS_VERSION_MAJOR.$Paludis::PALUDIS_VERSION_MINOR\n";
+  print PALUDIS_VERSION_MAJOR, ".", PALUDIS_VERSION_MINOR, ".", PALUDIS_VERSION_MICRO, "\n";
 
 =head1 DESCRIPTION
 
-Stub documentation for Paludis, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
+The Paludis package provides bindings for Paludis, the Other Package
+Mangler. Paludis is a multi-format package manager. It can currently be
+used on Gentoo and derivatives, using the ebuild and VDB repository
+formats, and on Exherbo using the exheres repository format.
 
-Blah blah blah.
+At the moment, these bindings simply provide access to the
+PALUDIS_VERSION constants (defining the version of paludis against which
+the module was built), and to the VersionSpec object (which allows
+comparing different version strings).
 
 =head2 EXPORT
 
 None by default.
 
+=head2 Exportable constants
 
+  PALUDIS_VERSION_MAJOR
+  PALUDIS_VERSION_MINOR
+  PALUDIS_VERSION_MICRO
 
 =head1 SEE ALSO
 
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
+L<Paludis::VersionSpec>
 
-If you have a mailing list set up for your module, mention it here.
+man paludis
 
-If you have a web site set up for your module, mention it here.
+paludis-sekrit@lists.pioto.org
+paludis-users@lists.pioto.org
+
+L<http://paludis.pioto.org/>
 
 =head1 AUTHOR
 
