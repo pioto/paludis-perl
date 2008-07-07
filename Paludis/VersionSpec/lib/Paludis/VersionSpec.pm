@@ -1,10 +1,8 @@
-package Paludis;
+package Paludis::VersionSpec;
 
 use 5.008008;
 use strict;
 use warnings;
-
-use Paludis::VersionSpec;
 
 require Exporter;
 
@@ -30,9 +28,13 @@ our @EXPORT = qw(
 our $VERSION = '0.01';
 
 require XSLoader;
-XSLoader::load('Paludis', $VERSION);
+XSLoader::load('Paludis::VersionSpec', $VERSION);
 
 # Preloaded methods go here.
+
+use overload
+    '<=>'    => \&Paludis::VersionSpec::comp,
+    fallback  => 1;
 
 1;
 __END__
