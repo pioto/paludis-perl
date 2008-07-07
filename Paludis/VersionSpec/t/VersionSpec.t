@@ -1,4 +1,4 @@
-use Test::More tests => 22;
+use Test::More tests => 18;
 use Test::Trap;
 use Paludis;
 
@@ -27,18 +27,10 @@ use Paludis;
     # compare to something that isn't a VersionSpec
     ok my $ver0 = Paludis::VersionSpec->new("0");
     my $zero = 0;
-    ok my $paludis = Paludis->new();
 
     no warnings 'void';
     trap { $zero == $ver0; };
     like $trap->stderr, qr/not a blessed SV reference/, '$ver0 == $zero' or diag $trap->stderr;
     trap { $zero != $ver0; };
     like $trap->stderr, qr/not a blessed SV reference/, '$ver0 != $zero' or diag $trap->stderr;
-
-    trap { $paludis == $ver0; };
-    like $trap->stderr, qr/must be a VersionSpec object/, '$paludis == $ver0' or diag $trap->stderr;
-    trap { $paludis != $ver0; };
-    like $trap->stderr, qr/must be a VersionSpec object/, '$paludis != $ver0' or diag $trap->stderr;
-    trap { $ver0 == $paludis; };
-    like $trap->stderr, qr/must be a VersionSpec object/, '$ver0 == $paludis' or diag $trap->stderr;
 }

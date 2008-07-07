@@ -16,31 +16,9 @@ extern "C" {
 
 using namespace paludis;
 
-class Paludis {
-    public:
-        Paludis() {
-        }
-        ~Paludis() {
-        }
-
-        int MAJOR_VERSION() {
-            return PALUDIS_VERSION_MAJOR;
-        }
-        int MINOR_VERSION() {
-            return PALUDIS_VERSION_MINOR;
-        }
-};
+#include "const-c.inc"
 
 MODULE = Paludis		PACKAGE = Paludis		
 
-Paludis *
-Paludis::new()
+INCLUDE: const-xs.inc
 
-void
-Paludis::DESTROY()
-
-int
-Paludis::MAJOR_VERSION()
-
-int
-Paludis::MINOR_VERSION()

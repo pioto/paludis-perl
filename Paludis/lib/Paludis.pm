@@ -3,10 +3,12 @@ package Paludis;
 use 5.008008;
 use strict;
 use warnings;
+use Carp;
 
 use Paludis::VersionSpec;
 
 require Exporter;
+use AutoLoader;
 
 our @ISA = qw(Exporter);
 
@@ -18,14 +20,41 @@ our @ISA = qw(Exporter);
 # If you do not need this, moving things directly into @EXPORT or @EXPORT_OK
 # will save memory.
 our %EXPORT_TAGS = ( 'all' => [ qw(
-	
+    PALUDIS_VERSION_MAJOR
+    PALUDIS_VERSION_MINOR
+    PALUDIS_VERSION_MICRO
 ) ] );
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 our @EXPORT = qw(
-	
+    PALUDIS_VERSION_MAJOR
+    PALUDIS_VERSION_MINOR
+    PALUDIS_VERSION_MICRO
 );
+
+sub AUTOLOAD {
+    # This AUTOLOAD is used to 'autoload' constants from the constant()
+    # XS function.
+
+    my $constname;
+    our $AUTOLOAD;
+    ($constname = $AUTOLOAD) =~ s/.*:://;
+    croak "&Bob::constant not defined" if $constname eq 'constant';
+    my ($error, $val) = constant($constname);
+    if ($error) { croak $error; }
+    {
+    no strict 'refs';
+    # Fixed between 5.005_53 and 5.005_61
+#XXX    if ($] >= 5.00561) {
+#XXX        *$AUTOLOAD = sub () { $val };
+#XXX    }
+#XXX    else {
+        *$AUTOLOAD = sub { $val };
+#XXX    }
+    }
+    goto &$AUTOLOAD;
+}
 
 our $VERSION = '0.01';
 

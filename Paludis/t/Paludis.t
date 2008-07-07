@@ -1,9 +1,8 @@
-use Test::More tests => 5;
+use Test::More tests => 4;
 BEGIN { use_ok('Paludis') };
 
 {
-    ok my $paludis = Paludis->new();
-    isa_ok $paludis, 'Paludis';
-    is $paludis->MAJOR_VERSION, 0;
-    is $paludis->MINOR_VERSION, 27;
+    is Paludis::PALUDIS_VERSION_MAJOR, 0;
+    is Paludis::PALUDIS_VERSION_MINOR, 27;
+    is Paludis::PALUDIS_VERSION_MICRO, 0;
 }

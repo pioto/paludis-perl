@@ -13,7 +13,7 @@ WriteMakefile(
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Paludis.pm', # retrieve abstract from module
        AUTHOR         => 'Mike Kelly <pioto@pioto.org>') : ()),
-    LIBS              => ['-lpaludis', '-lpaludisutil', '-lpaludisargs'],
+    LIBS              => [split / /, `pkg-config --libs-only-l paludis`],
     DEFINE            => '',
     CC                => $CC,
     CCFLAGS           => `pkg-config --cflags-only-other paludis`,
@@ -24,3 +24,29 @@ WriteMakefile(
     XSOPT             => '-C++',
     TYPEMAPS          => ['perlobject.map'],
 );
+
+if  (eval {require ExtUtils::Constant; 1}) {
+  # If you edit these definitions to change the constants used by this module,
+  # you will need to use the generated const-c.inc and const-xs.inc
+  # files to replace their "fallback" counterparts before distributing your
+  # changes.
+  my @names = (qw(PALUDIS_VERSION_MAJOR PALUDIS_VERSION_MINOR 
+      PALUDIS_VERSION_MICRO));
+  ExtUtils::Constant::WriteConstants(
+                                     NAME         => 'Paludis',
+                                     NAMES        => \@names,
+                                     DEFAULT_TYPE => 'IV',
+                                     C_FILE       => 'const-c.inc',
+                                     XS_FILE      => 'const-xs.inc',
+                                  );     
+
+}
+else {
+  use File::Copy;
+  use File::Spec;
+  foreach my $file ('const-c.inc', 'const-xs.inc') {
+    my $fallback = File::Spec->catfile('fallback', $file);
+    copy ($fallback, $file) or die "Can't copy $fallback to $file: $!";
+  }
+}
+
