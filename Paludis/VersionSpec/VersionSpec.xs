@@ -14,6 +14,8 @@ extern "C" {
 #include <iostream>
 #include <iomanip>
 
+#include <paludis-macros.hh>
+
 using namespace paludis;
 
 MODULE = Paludis::VersionSpec   PACKAGE = Paludis::VersionSpec
@@ -29,22 +31,44 @@ comp(lobj, robj, swap)
     VersionSpec * lobj
     VersionSpec * robj
     IV swap
+  INIT:
+    paludis_is_derived_from(ST(0),"Paludis::VersionSpec");
+    paludis_is_derived_from(ST(1),"Paludis::VersionSpec");
   CODE:
-    if (! sv_isobject(ST(0)) || ! sv_derived_from(ST(0), "Paludis::VersionSpec") )
-    {
-        warn( "Paludis::VersionSpec::comp() -- lobj must be a VersionSpec object" );
-        XSRETURN_UNDEF;
-    }
-    if (! sv_isobject(ST(1)) || ! sv_derived_from(ST(1), "Paludis::VersionSpec") )
-    {
-        warn( "Paludis::VersionSpec::comp() -- robj must be a VersionSpec object" );
-        XSRETURN_UNDEF;
-    }
-
     if (swap) {
         RETVAL = (robj->compare(*lobj));
     } else {
         RETVAL = (lobj->compare(*robj));
     }
+  OUTPUT:
+    RETVAL
+
+bool 
+VersionSpec::tilde_compare(VersionSpec * other)
+  INIT:
+    paludis_is_derived_from(ST(0),"Paludis::VersionSpec");
+    paludis_is_derived_from(ST(1),"Paludis::VersionSpec");
+  CODE:
+    RETVAL = THIS->tilde_compare(*other);
+  OUTPUT:
+    RETVAL
+
+bool 
+VersionSpec::tilde_greater_compare(VersionSpec * other)
+  INIT:
+    paludis_is_derived_from(ST(0),"Paludis::VersionSpec");
+    paludis_is_derived_from(ST(1),"Paludis::VersionSpec");
+  CODE:
+    RETVAL = THIS->tilde_greater_compare(*other);
+  OUTPUT:
+    RETVAL
+
+bool 
+VersionSpec::equal_star_compare(VersionSpec * other)
+  INIT:
+    paludis_is_derived_from(ST(0),"Paludis::VersionSpec");
+    paludis_is_derived_from(ST(1),"Paludis::VersionSpec");
+  CODE:
+    RETVAL = THIS->equal_star_compare(*other);
   OUTPUT:
     RETVAL

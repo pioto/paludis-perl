@@ -12,3 +12,4 @@ VersionSpec/Makefile.PL
 VersionSpec/VersionSpec.xs
 VersionSpec/lib/Paludis/VersionSpec.pm
 VersionSpec/t/VersionSpec.t
+paludis-macros.hh
