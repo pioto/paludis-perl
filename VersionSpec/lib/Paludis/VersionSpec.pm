@@ -42,7 +42,8 @@ __END__
 
 =head1 NAME
 
-Paludis - Perl bindings for Paludis, the Other Package Mangler
+Paludis::VersionSpec - Compare different versions according to Paludis'
+rules
 
 =head1 SYNOPSIS
 
