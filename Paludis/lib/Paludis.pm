@@ -45,13 +45,7 @@ sub AUTOLOAD {
     if ($error) { croak $error; }
     {
     no strict 'refs';
-    # Fixed between 5.005_53 and 5.005_61
-#XXX    if ($] >= 5.00561) {
-#XXX        *$AUTOLOAD = sub () { $val };
-#XXX    }
-#XXX    else {
-        *$AUTOLOAD = sub { $val };
-#XXX    }
+    *$AUTOLOAD = sub { $val };
     }
     goto &$AUTOLOAD;
 }
@@ -65,7 +59,6 @@ XSLoader::load('Paludis', $VERSION);
 
 1;
 __END__
-# Below is stub documentation for your module. You'd better edit it!
 
 =head1 NAME
 
@@ -121,6 +114,5 @@ Copyright (C) 2008 by Mike Kelly
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.8.8 or,
 at your option, any later version of Perl 5 you may have available.
-
 
 =cut

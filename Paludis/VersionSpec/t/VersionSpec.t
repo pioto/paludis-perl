@@ -1,6 +1,6 @@
-use Test::More tests => 22;
+use Test::More tests => 23;
 use Test::Trap;
-use Paludis;
+BEGIN { use_ok(Paludis) };
 
 {
     ok my $ver1 = Paludis::VersionSpec->new("1");
