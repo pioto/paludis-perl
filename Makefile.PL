@@ -23,6 +23,7 @@ WriteMakefile(
     # OBJECT            => '$(O_FILES)', # link all the C files too
     XSOPT             => '-C++',
     TYPEMAPS          => ['perlobject.map'],
+    clean             => {FILES => "const-*.inc"}
 );
 
 if  (eval {require ExtUtils::Constant; 1}) {
