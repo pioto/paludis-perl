@@ -9,7 +9,7 @@ my $paludis_include_dir = `pkg-config --cflags-only-I paludis`;
 WriteMakefile(
     NAME              => 'Paludis::VersionSpec',
     VERSION_FROM      => 'lib/Paludis/VersionSpec.pm',
-    PREREQ_PM         => {},
+    PREREQ_PM         => { 'Test::Trap' => 0 },
     ABSTRACT_FROM     => 'lib/Paludis/VersionSpec.pm',
     AUTHOR            => 'Mike Kelly <pioto@pioto.org>',
     LIBS              => [split / /, `pkg-config --libs-only-l paludis`],
